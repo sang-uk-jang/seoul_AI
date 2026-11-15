@@ -32,7 +32,7 @@ const server = http.createServer(async (req, res) => {
       [/^\/api\/auth\/logout$/, ['POST']],
       [/^\/api\/auth\/dogs$/, ['GET', 'HEAD', 'POST']],
       [/^\/api\/auth\/dogs\/skip-setup$/, ['POST']],
-      [new RegExp(`^/api/auth/dogs/${identifier}$`), ['PUT']],
+      [new RegExp(`^/api/auth/dogs/${identifier}$`), ['PUT', 'DELETE']],
       [new RegExp(`^/api/auth/dogs/${identifier}/visibility$`), ['PUT']],
       [new RegExp(`^/api/auth/dogs/${identifier}/public$`), ['GET', 'HEAD']],
       [/^\/api\/places\/(?:[0-9]{1,20}|csv-[a-f0-9]{20})\/(?:photo|kakao-photo)$/, ['POST']],
