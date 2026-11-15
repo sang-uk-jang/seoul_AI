@@ -184,7 +184,7 @@ export default function AccountMenu({ dogs, onDogsChange, onSessionChange }: {
     if (!dialog.current?.open) dialog.current?.showModal();
   }
 
-  const section = hash.slice(1);
+  const section = !hash || hash === '#' || hash === '#explore' ? 'shop' : hash.slice(1);
   const loginPath = `/api/auth/kakao?section=${encodeURIComponent(section)}`;
   const user = session?.user;
 

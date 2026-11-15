@@ -33,6 +33,15 @@ function App() {
   useEffect(() => { const sync = () => setAvatar(window.location.hash === '#avatar'); window.addEventListener('hashchange', sync); return () => window.removeEventListener('hashchange', sync); }, []);
   const [shop, setShop] = useState(window.location.hash === '#shop');
   const showShop = shop && loggedIn;
+  useEffect(() => {
+    const redirectHome = () => {
+      if (authReady && (!window.location.hash || window.location.hash === '#')) {
+        window.location.replace(loggedIn ? '#shop' : '#explore');
+      }
+    };
+    redirectHome(); window.addEventListener('hashchange', redirectHome);
+    return () => window.removeEventListener('hashchange', redirectHome);
+  }, [authReady, loggedIn]);
   useEffect(() => { if (shop && authReady && !loggedIn) { setShop(false); window.location.hash = 'explore'; } }, [shop, authReady, loggedIn]);
   useEffect(() => { const sync = () => setShop(window.location.hash === '#shop'); window.addEventListener('hashchange', sync); return () => window.removeEventListener('hashchange', sync); }, []);
   const [community, setCommunity] = useState(isCommunityHash(window.location.hash));
